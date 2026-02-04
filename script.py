@@ -21,9 +21,8 @@ def main(meeting_planner):
 
     load_dotenv()
 
-    llm_summary = ChatOpenAI(model="openai/gpt-oss-120b",
+    llm_summary = ChatOpenAI(model="YOUR MODEL",
                              api_key=os.getenv("API_KEY"),
-                             base_url=os.getenv("BASE_URL"),
                              verbose=1)
 
     prompt_summary = ChatPromptTemplate.from_template(
@@ -42,9 +41,8 @@ def main(meeting_planner):
 
     tools = [meeting_planner]
 
-    llm_scheduler = ChatOpenAI(model="openai/gpt-oss-120b",
-                            api_key=os.getenv("API_KEY"),
-                            base_url=os.getenv("BASE_URL")).bind_tools(tools,tool_choice="any")
+    llm_scheduler = ChatOpenAI(model="YOUR MODEL",
+                            api_key=os.getenv("API_KEY")).bind_tools(tools,tool_choice="any")
 
     prompt_meeting = ChatPromptTemplate.from_template(
                     """You are a meeting scheduling agent.
@@ -78,4 +76,5 @@ def main(meeting_planner):
     print(response["output"])
 
 if __name__ == "__main__":
+
     main(meeting_planner)
